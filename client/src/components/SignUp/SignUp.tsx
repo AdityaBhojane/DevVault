@@ -1,7 +1,8 @@
 import React from 'react';
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useTheme } from '../../zustand/Theme Store/useTheme';
+import { useNavigate } from 'react-router-dom';
 
 
 type FieldType = {
@@ -22,9 +23,10 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
 const SignUp: React.FC = () => {
 
   const currentTheme = useTheme(state=> state.currentTheme)
+  const navigate = useNavigate()
   
   return(
-  <div className={`p-10 rounded-2xl ${currentTheme? "border border-[#ccc]":"border border-[#000]"}`}>
+  <div className={`p-10 w-1/3 rounded-2xl font-semibold ${currentTheme? "":""}`}>
     <Form
       name="basic"
       labelCol={{ span: 33 }}
@@ -42,11 +44,11 @@ const SignUp: React.FC = () => {
       >
         <Input />
       </Form.Item>
+
       <Form.Item<FieldType>
         label="Email"
         name="Email"
-        rules={[{ required: true, message: 'Please input your email !' }]}
-
+        rules={[{ required: true, message: 'Please input your Email !' }]}
       >
         <Input />
       </Form.Item>
@@ -59,9 +61,9 @@ const SignUp: React.FC = () => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item<FieldType> name="remember" valuePropName="checked" label={null}>
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+      <div className="text-center pb-4">
+        <p className='font-normal'>Already have an account? <span onClick={()=>navigate("/auth/signin")} className='text-blue-400 font-semibold cursor-pointer'>sign in</span></p>
+      </div>
 
       <Form.Item label={null}>
         <Button type="primary" htmlType="submit" className='w-full'>
