@@ -31,7 +31,9 @@ const SignUp: React.FC = () => {
       name="basic"
       labelCol={{ span: 33 }}
       wrapperCol={{ span: 55 }}
-      style={{ maxWidth: 600 }}
+      style={{ 
+        width:"400px"
+       }}
       initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
