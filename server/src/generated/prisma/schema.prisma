@@ -25,7 +25,7 @@ model User {
   email           String           @unique
   username        String
   password        String
-  avatar          String
+  avatar          String?
   role            Role             @default(USER)
   enrolledCourses Course[]         @relation("StudentCourses")
   coursePurchase  CoursePurchase[]

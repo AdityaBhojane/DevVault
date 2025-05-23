@@ -1,10 +1,19 @@
-import express from "express"
+import express, { NextFunction, Request, Response } from "express"
 import appRouter from "./routes/appRouter";
 
 
 const app = express();
 app.use(express.json());
 
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error('GLOBAL ERROR HANDLER:', err);
+  
+    res.status(500).json({
+      message: 'Something went wrong',
+      error: err.message || 'Unknown Error',
+    });
+  });
+  
 app.use('/api',appRouter)
 
 app.get('/ping',(req,res)=>{

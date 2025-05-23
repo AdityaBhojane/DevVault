@@ -17,9 +17,17 @@
   "dependencies": {
     "@prisma/client": "^6.6.0",
     "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/multer": "^1.4.12",
+    "argon2": "^0.43.0",
+    "cloudinary": "^1.41.3",
     "concurrently": "^9.1.2",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^3.1.10",
     "prisma": "^6.6.0",
     "typescript": "^5.8.3"
