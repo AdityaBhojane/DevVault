@@ -9,6 +9,7 @@ import AboutPage from "../Pages/About/AboutPage";
 import ContactPage from "../Pages/Contact/ContactPage";
 import CoursesPage from "../Pages/Courses/CoursesPage";
 import CourseDetailsPage from "../Pages/courseDetails/CourseDetailsPage";
+import CourseDashboard from "../Pages/CourseDashboard/CourseDashboard";
 
 export default function AppRoutes() {
   return (
@@ -23,7 +24,8 @@ export default function AppRoutes() {
         <Route path="/course" element={<CoursesPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
         <Route path="/about" element={<AboutPage/>} />
-        <Route path="/courseDetails" element={<CourseDetailsPage/>} />
+        <Route path="/learn" element={<CourseDetailsPage/>} />
+        <Route path="/dashboard" element={<CourseDashboard/>} />
       </Route>
     </Routes>
   );
