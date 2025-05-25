@@ -1,6 +1,6 @@
 import { prisma } from "../config/prisma";
 
-
+// this CRUD repeated can be avoided!, i writing this to have some practice around prisma
 export const userRepository = {
     createUser:async(data:IUser)=> await prisma.user.create({data}),
     updateUser:async(id:number,data:IUserCreate)=> await prisma.user.update({where:{id:id},data}),

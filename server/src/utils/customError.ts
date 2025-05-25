@@ -9,6 +9,6 @@ export default function customErrorResponse(error: any) {
     }
     return ({
         success: false,
-        error: error.message
+        error: error.message,
     })
 }

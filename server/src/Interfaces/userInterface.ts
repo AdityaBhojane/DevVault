@@ -10,4 +10,6 @@ interface IUserCreate{
     email?:string,
     password?:string
     avatar?:string
+    public_id?:string
+    
 }

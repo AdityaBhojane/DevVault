@@ -19,27 +19,35 @@ enum Role {
   TEACHER
 }
 
+enum Status {
+  Pending
+  Completed
+  Rejected
+}
+
 model User {
-  id              Int      @id @default(autoincrement())
-  email           String   @unique
+  id              Int              @id @default(autoincrement())
+  email           String           @unique
   username        String
   password        String
   avatar          String?
-  role            Role     @default(USER)
-  enrolledCourses Course[] @relation("StudentCourses")
+  public_id       String
+  role            Role             @default(USER)
+  enrolledCourses Course[]         @relation("StudentCourses")
   coursePurchase  CoursePurchase[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @default(now()) @updatedAt
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @default(now()) @updatedAt
 }
 
 model Course {
   id              Int              @id @default(autoincrement())
-  title           String
+  title           String           
   subtitle        String
   description     String
   category        String
   price           String
   thumbnail       String
+  public_id       String
   enrolledStudent User[]           @relation("StudentCourses")
   lectures        Lecture[]
   createdAt       DateTime         @default(now())
@@ -52,6 +60,7 @@ model Lecture {
   title       String
   description String
   videoURL    String
+  public_id   String
   duration    Int
   course      Course @relation(fields: [courseId], references: [id])
   courseId    Int
@@ -62,8 +71,8 @@ model CoursePurchase {
   courseId  Int
   userId    Int
   amount    Int
-  status    String
+  status    Status @default(Pending)
   paymentId Int
   course    Course @relation(fields: [courseId], references: [id])
-  user    User @relation(fields: [userId], references: [id])
+  user      User   @relation(fields: [userId], references: [id])
 }

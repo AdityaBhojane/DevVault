@@ -1,13 +1,17 @@
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN', 'TEACHER');
 
+-- CreateEnum
+CREATE TYPE "Status" AS ENUM ('Pending', 'Completed', 'Rejected');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "avatar" TEXT NOT NULL,
+    "avatar" TEXT,
+    "public_id" TEXT NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -24,6 +28,7 @@ CREATE TABLE "Course" (
     "category" TEXT NOT NULL,
     "price" TEXT NOT NULL,
     "thumbnail" TEXT NOT NULL,
+    "public_id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -36,6 +41,7 @@ CREATE TABLE "Lecture" (
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "videoURL" TEXT NOT NULL,
+    "public_id" TEXT NOT NULL,
     "duration" INTEGER NOT NULL,
     "courseId" INTEGER NOT NULL,
 
@@ -48,7 +54,7 @@ CREATE TABLE "CoursePurchase" (
     "courseId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     "amount" INTEGER NOT NULL,
-    "status" TEXT NOT NULL,
+    "status" "Status" NOT NULL DEFAULT 'Pending',
     "paymentId" INTEGER NOT NULL,
 
     CONSTRAINT "CoursePurchase_pkey" PRIMARY KEY ("id")
