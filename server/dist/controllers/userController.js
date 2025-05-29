@@ -23,7 +23,7 @@ const getUserByIdController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const id = Number(req.params.id);
         if (isNaN(id)) {
-            return res.status(400).json({ message: 'Invalid user ID' });
+            return res.status(400).json({ success: false, error: 'invalid user id' });
         }
         const response = yield (0, userService_1.getUserService)(id);
         res.status(200).json({
@@ -32,14 +32,18 @@ const getUserByIdController = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
     catch (error) {
         console.log(error);
+        res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json((0, customError_1.default)(error));
     }
 });
 exports.getUserByIdController = getUserByIdController;
 const updateUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.query.id);
+        const id = Number(req.user.id);
         if (isNaN(id)) {
-            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json((0, customError_1.default)("invalid user id"));
+            res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({ success: false, error: 'invalid user id' });
+            if (req.file) {
+                yield (0, cloudinary_1.deleteImageCloudinary)(req.file.filename);
+            }
             return;
         }
         ;
@@ -47,10 +51,11 @@ const updateUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
         const updateData = { username: username };
         if (req.file) {
             updateData.avatar = req.file.path;
+            updateData.public_id = req.file.filename;
             // delete find user and delete old image;
             const user = yield userRepository_1.userRepository.getUserById(id);
-            if (user && user.avatar) {
-                yield (0, cloudinary_1.deleteImageCloudinary)(user.avatar);
+            if (user && user.public_id) {
+                yield (0, cloudinary_1.deleteImageCloudinary)(user.public_id);
             }
         }
         ;
@@ -69,11 +74,12 @@ const updateUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
 exports.updateUserController = updateUserController;
 const deleteUserController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = Number(req.params.id);
+        const id = Number(req.user.id);
         if (isNaN(id)) {
             res.status(400).json({ message: 'Invalid user ID' });
             return;
         }
+        ;
         const response = yield (0, userService_1.deleteUserService)(id);
         res.status(200).json({
             message: response
@@ -81,6 +87,7 @@ const deleteUserController = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
     catch (error) {
         console.log(error);
+        res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json((0, customError_1.default)(error));
     }
 });
 exports.deleteUserController = deleteUserController;

@@ -13,6 +13,7 @@ exports.deleteUserService = exports.updateUserService = exports.getUserService =
 const http_status_codes_1 = require("http-status-codes");
 const userRepository_1 = require("../repository/userRepository");
 const ApiError_1 = require("../utils/Error/ApiError");
+const cloudinary_1 = require("../utils/file upload/cloudinary");
 const getUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield userRepository_1.userRepository.getUserById(id);
@@ -39,6 +40,10 @@ const updateUserService = (id, data) => __awaiter(void 0, void 0, void 0, functi
 exports.updateUserService = updateUserService;
 const deleteUserService = (id) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const isUser = yield userRepository_1.userRepository.getUserById(id);
+        if (isUser === null || isUser === void 0 ? void 0 : isUser.public_id) {
+            yield (0, cloudinary_1.deleteImageCloudinary)(isUser.public_id);
+        }
         const response = yield userRepository_1.userRepository.deleteUserById(id);
         return response;
     }

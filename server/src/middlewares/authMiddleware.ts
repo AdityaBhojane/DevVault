@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import { USER_SECRET } from "../config/serverConfig"
 import { StatusCodes } from "http-status-codes";
-import customErrorResponse from "../utils/customError";
 import { verify } from "jsonwebtoken";
 
 declare module "express-serve-static-core" {
@@ -14,7 +13,8 @@ const validateUser = async (req: Request, res: Response, next: NextFunction) => 
     try {
         const token = req.headers['x-access-token'] as string;
         if (!token) {
-            res.status(StatusCodes.UNAUTHORIZED).json(customErrorResponse("token not found"));
+            res.status(StatusCodes.UNAUTHORIZED).json({ message: "token not found" });
+            return;
         };
         const decode = verify(token, USER_SECRET);
         req.user = decode;

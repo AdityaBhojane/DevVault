@@ -26,9 +26,12 @@ export const getUserByIdController = async (req: Request, res: Response) => {
 
 export const updateUserController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.query.id);
+        const id = Number(req.user.id);
         if (isNaN(id)) {
             res.status(StatusCodes.BAD_REQUEST).json({ success: false, error: 'invalid user id' });
+            if (req.file) {
+                await deleteImageCloudinary(req.file.filename)
+            }
             return;
         };
         const { username } = req.body;
@@ -57,11 +60,11 @@ export const updateUserController = async (req: Request, res: Response) => {
 
 export const deleteUserController = async (req: Request, res: Response) => {
     try {
-        const id = Number(req.params.id);
+        const id = Number(req.user.id);
         if (isNaN(id)) {
             res.status(400).json({ message: 'Invalid user ID' });
             return;
-        }
+        };
         const response = await deleteUserService(id);
         res.status(200).json({
             message: response

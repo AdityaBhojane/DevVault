@@ -1,6 +1,7 @@
 import { StatusCodes } from "http-status-codes";
 import { userRepository } from "../repository/userRepository"
 import { ApiError } from "../utils/Error/ApiError";
+import { deleteImageCloudinary } from "../utils/file upload/cloudinary";
 
 
 
@@ -27,6 +28,10 @@ export const updateUserService = async(id:number, data:IUserCreate)=>{
 
 export const deleteUserService = async(id:number)=>{
     try {
+        const isUser = await userRepository.getUserById(id);
+        if(isUser?.public_id){
+            await deleteImageCloudinary(isUser.public_id)
+        }
         const response = await userRepository.deleteUserById(id);
         return response
     } catch (error) {

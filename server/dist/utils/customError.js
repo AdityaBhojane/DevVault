@@ -10,6 +10,6 @@ function customErrorResponse(error) {
     }
     return ({
         success: false,
-        error: error.message
+        error: error.message,
     });
 }

@@ -31,7 +31,7 @@ model User {
   username        String
   password        String
   avatar          String?
-  public_id       String
+  public_id       String?
   role            Role             @default(USER)
   enrolledCourses Course[]         @relation("StudentCourses")
   coursePurchase  CoursePurchase[]
@@ -47,7 +47,7 @@ model Course {
   category        String
   price           String
   thumbnail       String
-  public_id       String
+  public_id       String?
   enrolledStudent User[]           @relation("StudentCourses")
   lectures        Lecture[]
   createdAt       DateTime         @default(now())
@@ -60,8 +60,7 @@ model Lecture {
   title       String
   description String
   videoURL    String
-  public_id   String
-  duration    Int
+  public_id   String?
   course      Course @relation(fields: [courseId], references: [id])
   courseId    Int
 }

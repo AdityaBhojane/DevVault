@@ -3,6 +3,7 @@ import appRouter from "./routes/appRouter";
 
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

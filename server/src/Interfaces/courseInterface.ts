@@ -5,6 +5,7 @@ interface ICourse {
     description: string,
     category: string,
     price: string,
+    public_id:string,
     thumbnail: string,
     createdAt: Date,
     updatedAt: Date,
@@ -14,7 +15,6 @@ interface ICoursePurchase {
     courseId:number,
     userId:number,
     amount:number,
-    status:string,
     paymentId:number,
     
 }

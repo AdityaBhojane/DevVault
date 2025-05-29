@@ -13,8 +13,9 @@ export const createCourseController = async (req: Request, res: Response) => {
             return;
         }
         data.thumbnail = req.file.path;
+        data.public_id = req.file.filename;
         console.log(data);
-        const response = courseCreateService(data);
+        const response = await courseCreateService(data);
         res.status(StatusCodes.OK).json(customSuccussResponse("course created Successfully", response))
     } catch (error) {
         console.log("create course controller error", error);
@@ -29,16 +30,17 @@ export const createCourseController = async (req: Request, res: Response) => {
 export const updateCourseController = async (req: Request, res: Response) => {
     try {
         const data = req.body;
-        const id = Number(req.params.id);
+        const id = Number(req.query.id);
+        console.log("data ",data,id)
         if (!id && isNaN(id)) {
             res.status(StatusCodes.FORBIDDEN).json({success:false, error:'course id is required'});
             return;
         }
         if (req.file) {
             data.thumbnail = req.file.path;
-            console.log("file is here", data)
+            data.public_id = req.file.filename;
         }
-        const response = courseUpdateService(data, id);
+        const response = await courseUpdateService(data, id);
         res.status(StatusCodes.OK).json(customSuccussResponse("course updated Successfully", response))
     } catch (error) {
         console.log("update course controller error", error);
@@ -52,12 +54,12 @@ export const updateCourseController = async (req: Request, res: Response) => {
 
 export const getCourseController =  async(req: Request, res: Response)=>{
     try {
-       const id = Number(req.params.id);
+       const id = Number(req.query.id);
         if (isNaN(id)) {
             res.status(StatusCodes.FORBIDDEN).json({success:false, error:'course id is required'});
             return;
         };
-        const response = courseGetService(id);
+        const response = await courseGetService(id);
         res.status(StatusCodes.OK).json(customSuccussResponse("course fetched Successfully", response))
     } catch (error) {
         console.log("get course controller error", error);
@@ -67,12 +69,12 @@ export const getCourseController =  async(req: Request, res: Response)=>{
 
 export const deleteCourseController =  async(req: Request, res: Response)=>{
     try {
-       const id = Number(req.params.id);
+       const id = Number(req.query.id);
         if (isNaN(id)) {
             res.status(StatusCodes.FORBIDDEN).json({success:false, error:'course id is required'});
             return;
         };
-        const response = courseDeleteService(id);
+        const response = await courseDeleteService(id);
         res.status(StatusCodes.OK).json(customSuccussResponse("course deleted Successfully", response))
     } catch (error) {
         console.log("delete course controller error", error);

@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRepository = void 0;
 const prisma_1 = require("../config/prisma");
+// this CRUD repeated can be avoided!, i writing this to have some practice around prisma
 exports.userRepository = {
     createUser: (data) => __awaiter(void 0, void 0, void 0, function* () { return yield prisma_1.prisma.user.create({ data }); }),
     updateUser: (id, data) => __awaiter(void 0, void 0, void 0, function* () { return yield prisma_1.prisma.user.update({ where: { id: id }, data }); }),

@@ -13,9 +13,18 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
     cloudinary:cloudinary
-})
+});
 
-export const upload = multer({storage:storage,limits:{fileSize:100 * 1024 * 1024}});
+const storageVideo = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    resource_type: 'video',
+  } as any
+});
+
+
+export const upload = multer({storage:storage,limits:{fileSize:100 * 1024 * 5}});
+export const uploadVideo = multer({storage:storageVideo,limits:{fileSize:100 * 1024 * 1024}});
 
 
 export const deleteImageCloudinary = async(publicId:string)=>{

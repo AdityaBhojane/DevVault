@@ -11,7 +11,7 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "avatar" TEXT,
-    "public_id" TEXT NOT NULL,
+    "public_id" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -28,7 +28,7 @@ CREATE TABLE "Course" (
     "category" TEXT NOT NULL,
     "price" TEXT NOT NULL,
     "thumbnail" TEXT NOT NULL,
-    "public_id" TEXT NOT NULL,
+    "public_id" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -41,7 +41,7 @@ CREATE TABLE "Lecture" (
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "videoURL" TEXT NOT NULL,
-    "public_id" TEXT NOT NULL,
+    "public_id" TEXT,
     "duration" INTEGER NOT NULL,
     "courseId" INTEGER NOT NULL,
 
