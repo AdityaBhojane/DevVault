@@ -17,7 +17,7 @@ exports.courseRepository = {
     updateCourse: (data, id) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.course.update({ where: { id: id }, data }); }),
     getCourse: (id) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.course.findUnique({ where: { id: id } }); }),
     deleteCourse: (id) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.course.delete({ where: { id: id } }); }),
-    coursePurchase: (data) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.coursePurchase.create({ data }); }),
+    coursePurchaseCreate: (data) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.coursePurchase.create({ data }); }),
     coursePurchaseDelete: (id) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.coursePurchase.delete({ where: { id: id } }); }),
     coursePurchaseUpdate: (data, id) => __awaiter(void 0, void 0, void 0, function* () { return prisma_1.prisma.coursePurchase.update({ where: { id: id }, data }); }),
 };

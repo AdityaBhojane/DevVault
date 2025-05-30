@@ -15,6 +15,8 @@ interface ICoursePurchase {
     courseId:number,
     userId:number,
     amount:number,
-    paymentId:number,
-    
+    paymentId:string,
+    orderId:string,
+    signature:string 
+    status?: "Completed" | "Rejected"
 }

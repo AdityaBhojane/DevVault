@@ -2,6 +2,7 @@ import React from 'react';
 import { useTheme } from '../../zustand/Theme Store/useTheme';
 import { motion } from 'framer-motion';
 import { Lock } from 'lucide-react';
+import displayRazorpay from '../../components/Payment/Razorpay';
 
 const CourseDetailsPage: React.FC = () => {
   const currentTheme = useTheme((state) => state.currentTheme);
@@ -11,7 +12,7 @@ const CourseDetailsPage: React.FC = () => {
     subtitle: 'From Basics to Advanced Concepts',
     description: `This course is your complete guide to learning React from scratch. 
     You'll go from building your first component to mastering complex concepts like hooks, context, performance optimization, and more.`,
-    price: '₹1,999',
+    price: 1999,
     thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeoqmEC3hmAuYOLEFCitbByZz66sQxr4Gaiw&s', 
     instructor: {
       name: 'Aditya Bhojane',
@@ -92,6 +93,7 @@ const CourseDetailsPage: React.FC = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={()=>displayRazorpay(course.price)}
             className="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md transition"
           >
             Buy Now

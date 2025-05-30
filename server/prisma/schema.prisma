@@ -41,11 +41,11 @@ model User {
 
 model Course {
   id              Int              @id @default(autoincrement())
-  title           String           
+  title           String
   subtitle        String
   description     String
   category        String
-  price           String
+  price           Int
   thumbnail       String
   public_id       String?
   enrolledStudent User[]           @relation("StudentCourses")
@@ -56,22 +56,24 @@ model Course {
 }
 
 model Lecture {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
   description String
   videoURL    String
   public_id   String?
-  course      Course @relation(fields: [courseId], references: [id])
+  course      Course  @relation(fields: [courseId], references: [id])
   courseId    Int
 }
 
 model CoursePurchase {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   courseId  Int
   userId    Int
   amount    Int
-  status    Status @default(Pending)
-  paymentId Int
-  course    Course @relation(fields: [courseId], references: [id])
-  user      User   @relation(fields: [userId], references: [id])
+  status    Status  @default(Pending)
+  paymentId String?
+  orderId   String  
+  signature String?
+  course    Course  @relation(fields: [courseId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 }

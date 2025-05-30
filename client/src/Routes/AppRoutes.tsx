@@ -11,6 +11,7 @@ import CoursesPage from "../Pages/Courses/CoursesPage";
 import CourseDetailsPage from "../Pages/courseDetails/CourseDetailsPage";
 import CourseDashboard from "../Pages/CourseDashboard/CourseDashboard";
 
+
 export default function AppRoutes() {
   return (
     <Routes>
